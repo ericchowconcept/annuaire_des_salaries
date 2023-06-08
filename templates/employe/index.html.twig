@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuaire{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-3">Annuaire</h1>
+    <div class="container">
+        <table class="table table-striped border border-dark">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th>Salaire</th>
+                    <th>DateDeNaissance</th>
+                    <th>Option</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for salarie in salaries %}
+                <tr>
+                    <td>{{ salarie.id }}</td>
+                    <td>{{ salarie.prenom }}</td>
+                    <td>{{ salarie.nom }}</td>
+                    <td>{{ salarie.telephone }}</td>
+                    <td>{{ salarie.email }}</td>
+                    <td>{{ salarie.adresse }}</td>
+                    <td>{{ salarie.salaire }}</td>
+                    <td>{{ salarie.datedenaissance|date('d-M-y') }}</td>
+                    <td>
+                        <a href="{{ path('edit_employe', {id: salarie.id}) }}"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ path('delete_employe', {id: salarie.id}) }}"><i class="bi bi-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Ajouter un salarié
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+            {{ form_start(form,{
+            attr:{
+                novalidate : "novalidate"
+            }
+        }) }}
+
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.salaire) }}
+        {{ form_row(form.datedenaissance) }}
+        
+        <button type="submit" class="btn btn-primary">Valider</button>
+    
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
