@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EmployeRepository;
+
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EmployeRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
 class Employe
@@ -15,27 +17,41 @@ class Employe
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
+    #[Assert\Length(min:5,max:255, minMessage: "Pas assez de caractères . il faut au moins {{ limit }} caractères et {{ value }} est trop court")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
+    #[Assert\Length(min:5,max:255, minMessage: "Pas assez de caractères . il faut au moins {{ limit }} caractères et {{ value }} est trop court")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
+    #[Assert\Length(min:5,max:255, minMessage: "Pas assez de caractères . il faut au moins {{ limit }} caractères et {{ value }} est trop court")]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
+    #[Assert\Length(min:5,max:255, minMessage: "Pas assez de caractères . il faut au moins {{ limit }} caractères et {{ value }} est trop court")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
+    #[Assert\Length(min:5,max:255, minMessage: "Pas assez de caractères . il faut au moins {{ limit }} caractères et {{ value }} est trop court")]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
+    #[Assert\Length(min:5,max:255, minMessage: "Pas assez de caractères . il faut au moins {{ limit }} caractères et {{ value }} est trop court")]
     private ?string $poste = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
     private ?int $salaire = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Ce champs ne peut être vide")]
     private ?\DateTimeInterface $datedenaissance = null;
 
 

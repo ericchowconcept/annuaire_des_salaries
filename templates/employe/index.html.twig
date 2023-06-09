@@ -3,7 +3,7 @@
 {% block title %}Annuaire{% endblock %}
 
 {% block body %}
-    <h1 class="text-center my-5">Annuaire</h1>
+    <h1 class="text-center my-3">Annuaire</h1>
    
 
     <div class="container">
@@ -42,7 +42,7 @@
       </div>
     </div>
   {# !Annuaire des salaires #}
-    <div class="container mt-5">
+    <div class="container mt-2">
         <table class="table table-striped border border-dark">
             <thead>
                 <tr>
@@ -91,14 +91,15 @@
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              {{ form_start(form,{
+            
+             {{ form_start(form,{
               attr:{
                   novalidate : "novalidate"
               }
               }) }}
-              {{ form_row(form.prenom) }}
-              {{ form_row(form.nom) }}
-              {{ form_row(form.telephone) }}
+               {{ form_row(form.prenom) }}
+               {{ form_row(form.nom) }}
+               {{ form_row(form.telephone) }}
               {{ form_row(form.email) }}
               {{ form_row(form.adresse) }}
               {{ form_row(form.poste) }}
@@ -113,6 +114,7 @@
         </div>
       </div>
     </div>
+    
     
 
 {% endblock %}

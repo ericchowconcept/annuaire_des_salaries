@@ -32,6 +32,15 @@ class EmployeController extends AbstractController
             case 'sal_d':
             $salarie = $repo->findBy([],['salaire' => 'DESC']);
             break;
+            case 'dev':
+            $salarie = $repo->findBy(['poste' => 'developpeur']);
+            break;
+            case 'inf':
+            $salarie = $repo->findBy(['poste' => 'Informaticien']);
+            break;
+            case 'cor':
+            $salarie = $repo->findBy(['poste' => 'Coordinateur']);
+            break;
             default:
             $salarie = $repo->findAll();  
         }
@@ -93,8 +102,8 @@ class EmployeController extends AbstractController
     #[Route('/show', name:'show_poste')]
     public function show(EmployeRepository $repo)
     {
-        $salarie = $repo->findBy([],['poste' => 'developpeur']);
-        return $this->render('employe/filternom.html.twig',[
+        $salarie = $repo->findBy(['poste' => 'developpeur']);
+        return $this->render('employe/filterposte.html.twig',[
                    'salaries' => $salarie
        ]);
     }
