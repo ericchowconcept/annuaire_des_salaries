@@ -50,8 +50,10 @@ class EmployeController extends AbstractController
         $form = $this->createForm(EmployeType::class, $employe);
         $form->handleRequest($globals);
 
+
         if($form->isSubmitted() && $form->isValid())
         {
+
             $manager->persist($employe);
             $manager->flush();
             return $this->redirectToRoute('employe');

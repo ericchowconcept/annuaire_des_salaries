@@ -2,12 +2,14 @@
 
 namespace App\Form;
 
+
 use App\Entity\Employe;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class EmployeType extends AbstractType
 {
@@ -26,8 +28,12 @@ class EmployeType extends AbstractType
                 'Coordinateur' => 'Coordinateur',
             ]])
             ->add('salaire')
+
             ->add('datedenaissance', DateType::class,[
                 'widget' => 'single_text',
+                'constraints' => [
+                    new DateTime(),
+                ]
             ]);
 
     }
