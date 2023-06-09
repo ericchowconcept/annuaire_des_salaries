@@ -14,9 +14,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EmployeController extends AbstractController
 {
     #[Route('/', name: 'employe')]
-    public function index(EmployeRepository $repo, Request $globals, EntityManagerInterface $manager): Response
+    #[Route('/filter/{filtre}', name:"filter_employe")]
+    public function index(EmployeRepository $repo, Request $globals, EntityManagerInterface $manager, $filtre=null): Response
     {
-        $salarie = $repo->findAll();
+           
+        switch($filtre)
+        {
+            case 'nom_a':
+            $salarie = $repo->findBy([],['nom' => 'ASC']);
+            break;
+            case 'nom_d':
+            $salarie = $repo->findBy([],['nom' => 'DESC']);
+            break;
+            case 'sal_a':
+            $salarie = $repo->findBy([],['salaire' => 'ASC']);
+            break;
+            case 'sal_d':
+            $salarie = $repo->findBy([],['salaire' => 'DESC']);
+            break;
+            default:
+            $salarie = $repo->findAll();  
+        }
+        
         $employe = new Employe;
 
         $form = $this->createForm(EmployeType::class, $employe);
@@ -34,6 +53,9 @@ class EmployeController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    
+ 
 
     #[Route('/add', name:'add_employe')]
     #[Route('/edit/{id}', name:'edit_employe')]
@@ -67,4 +89,15 @@ class EmployeController extends AbstractController
         $manager->flush();
         return $this->redirectToRoute('employe');
     }
+
+    #[Route('/show', name:'show_poste')]
+    public function show(EmployeRepository $repo)
+    {
+        $salarie = $repo->findBy([],['poste' => 'developpeur']);
+        return $this->render('employe/filternom.html.twig',[
+                   'salaries' => $salarie
+       ]);
+    }
+
+    
 }
